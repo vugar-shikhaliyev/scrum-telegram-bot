@@ -185,7 +185,14 @@ def cmd_register(message):
     bot.send_message(message.chat.id, f"Qeyd olundu ✅  {canon} → chat_id: {message.chat.id}")
 
 # --- DM text = cavabların toplanması ---
-@bot.message_handler(func=lambda m: m.chat.type == "private", content_types=['text'])
+@bot.message_handler(
+    func=lambda m: m.chat.type == "private" and not (m.text or "").startswith("/"),
+    content_types=['text']
+)
+
+@bot.message_handler(commands=['whoami'])
+def cmd_whoami(message):
+    bot.reply_to(message, f"chat_id: {message.chat.id}")
 def handle_private_text(message):
     if message.text.startswith("/"): return
     users = load_json(USERS_FILE, {})
