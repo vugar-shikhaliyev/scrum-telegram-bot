@@ -122,15 +122,13 @@ def reschedule_jobs():
     try:
         scheduler.add_job(
             job_send_prompts,
-            CronTrigger(day_of_week="mon-fri", hour=PROMPT_HOUR, minute=PROMPT_MINUTE),
-            id="prompt",
-            replace_existing=True,
+            CronTrigger(day_of_week="mon-fri", hour=PROMPT_HOUR, minute=PROMPT_MINUTE, timezone=TIMEZONE),
+            id="prompt", replace_existing=True
         )
         scheduler.add_job(
             job_post_summary,
-            CronTrigger(day_of_week="mon-fri", hour=SUMMARY_HOUR, minute=SUMMARY_MINUTE),
-            id="summary",
-            replace_existing=True,
+            CronTrigger(day_of_week="mon-fri", hour=SUMMARY_HOUR, minute=SUMMARY_MINUTE, timezone=TIMEZONE),
+            id="summary", replace_existing=True
         )
     except Exception:
         pass
@@ -487,7 +485,7 @@ def job_post_summary():
 
 # ======== FastAPI + webhook ========
 app = FastAPI()
-scheduler = AsyncIOScheduler()
+scheduler = AsyncIOScheduler(timezone=TIMEZONE)
 
 @app.on_event("startup")
 async def on_start():
