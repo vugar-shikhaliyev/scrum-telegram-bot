@@ -49,11 +49,23 @@
         "2025-09-24",
         "2025-09-30"
       ]
+    ],
+    "Müzəffər": [
+      [
+        "2025-10-20",
+        "2025-10-31"
+      ]
+    ],
+    "Rza": [
+      [
+        "2025-10-23",
+        "2025-10-31"
+      ]
     ]
   },
   "PROMPT_HOUR": 9,
-  "PROMPT_MINUTE": 26,
+  "PROMPT_MINUTE": 10,
   "SUMMARY_HOUR": 9,
-  "SUMMARY_MINUTE": 35,
+  "SUMMARY_MINUTE": 30,
   "LIVE_SCRUM_AT": "9:35"
 }
