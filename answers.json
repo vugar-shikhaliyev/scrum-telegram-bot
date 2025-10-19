@@ -1,0 +1,80 @@
+{
+  "2025-09-16": {
+    "Vüqar": "1. bu gün səni yaradiram\n2. dunen reliz planladiq\n3. yoxdur"
+  },
+  "2025-09-17": {
+    "Rza": "1) Taskım yoxdur, automationa baxacam əlavə task olmasa\n2) AML taskı test edildi\n3) Yoxdur",
+    "Ibrahim": "Salam.\n1)Adımda olan taskları edəcəm.\n2)Taskları etdim\n3)yoxdur",
+    "Xəyyam": "Salam"
+  },
+  "2025-09-18": {
+    "Xəyyam": "1) Retail Kasko print problemi həll olundu. L-inovice ödəniş taskı terminal payment üçün test olundu\n2)Hazırda taskım yoxdur.WebIMS OTP automation davam edəcəm\n3)L-inovice ödəniş taskı online ödəniş test edilə bilinmədi.Səbəb Birkart kart məlumatlarinin expire olması.",
+    "Fidan": "1) 6180-Client Portalda Hesablar bölməsində yalnız invoice_type =1 invoysların əks olunması(Not Fixed)\n     6109-Şəxsi kabinetdə yığım sığortası üzrə ödənişin alınması müraciəti üçün şablon faylın yenilənməsi(Ready For Master)\n2)6178-İpoteka müqavilələrinin təsdiq problemi - GetCompanyContractByDocNumber servisin səhv çağrılması taskına baxacam\n3)Yoxdur",
+    "Rəsul": "1) 17 sorğu həll etdim\n2) 2 sorğum var gecikən yoxdur\n3) Yoxdur"
+  },
+  "2025-09-23": {
+    "Müzəffər": "1) Dunen 10 sorgu hell etdim\n2) Bu gun 4 sorgum var,  geciken sorgu yoxdur\n3) Bloklayan problem yoxdur",
+    "Fidan": "1)6090-CRM – Auto-generate Task on Offer Approval-not fixed\n2)6005-Implementation of Survey Submission Functionality by Sales Representative / Satıcı tərəfindən Survey-ə Göndərilməsi Funksionallığının Əlavə Edilməsi\n3)yoxdur"
+  },
+  "2025-09-24": {
+    "Rza": "1. 6114 Invoice rfm etdim \n2. 5886 Import policy payment taskin baxiram hazirda\n3. Yoxdur (testserver02 pam ve mssql access hele de gozlenilir)",
+    "Ibrahim": "Salam,\nDünən 12 sorğu həll etdim.\nBu gün 2 açıq sorğum var.\nGecikən və bloklanan sorğu yoxdur."
+  },
+  "2025-09-25": {
+    "Fidan": "1)6119-OPS – Device Fingerprint Restriction for CMTPL Policy Creation- Ready For Master\n6036-IMS – “Cannot Reach for Survey” Notification Workflow-build, deploy error var idi.\n2)6036-IMS – “Cannot Reach for Survey” Notification Workflow-baxacam\n3)yoxdur",
+    "Rəsul": "1) 8 sorğu etdim\n2) 2 sorğu var gecikən sorğu 2 (Osaqolar, Vəliyar komissiya)\n3) yoxdur"
+  },
+  "2025-09-29": {
+    "Rza": "1. Pass\n2. Hazirda elave taskim yoxdur\n3. Liability ve isb taski var her 2si developerdedi. Liability mehsulunu Orxan yeniden elave etmelidir test servere, Isb de Remzinin localina access yoxdu deye davam ede bilmir (sorgu nomresi 104737)"
+  },
+  "2025-09-30": {
+    "Müzəffər": "1) Dunen 9 sorgu hell etdim\n2) Bu gun 5 sorgum var,  geciken sorgu yoxdur\n3) Bloklayan problem yoxdur",
+    "Fidan": "1)6005-Implementation of Survey Submission Functionality by Sales Representative / Satıcı tərəfindən Survey-ə Göndərilməsi Funksionallığının Əlavə Edilməsi (RFM)\n6090-CRM – Auto-generate Task on Offer Approval(yene not fixed)\n2)5019-Client portal Yığım ərizə formalarında minimum boy və çəki\n3)yoxdur"
+  },
+  "2025-10-01": {
+    "Ibrahim": "Salam,\n1)Dünən 7 sorğu etdim\n2)Bu gün 3 sorğum var\n3)Bloklaya və gecikən sorğu yoxdur",
+    "Rza": "1. Isb import not fix\n2. Liabilitye baxiram hazirda\n3. Yoxdur"
+  },
+  "2025-10-02": {
+    "Fidan": "1)6174-Administration environmentdə login save problemi(RFM)\n6093-Səfər Sığortasında addendum  ləğv edilsə də, yeni addendum yaratmaq olmur(baxiram)\n2)Masterin testine baxacam\n3)yoxdur",
+    "Rəsul": "1) 16 sorğu həll etdim\n2) 3 aktiv sorğu var. \nGecikən Osaqolar 104756.\nSual 105231.\nTest üçün 1C-yə 400012947911 bu invoice-un ödənişini dünən 940dan göndərdim.\nFinancials.PaymentReference da must_export 1 qalıb. \nBunu işlədən Payment export servisidirsə bu işləyir.\n3) Bloklayan yoxdur."
+  },
+  "2025-10-06": {
+    "Rza": "1. Pass\n2. Isb import da reviewden sonra kod deyisikliyi edilir onu test edecem, birde masterin testi"
+  },
+  "2025-10-07": {
+    "Fidan": "1)Masterin testinə baxdım\n2)baxacağım 1-2 məsələ qalıb masterdə\n3)yoxdur",
+    "Müzəffər": "1) Dunen 10 sorgu hell etdim\n2) Bu gun 7 sorgum var,  geciken sorgu yoxdur\n3) Bloklayan problem yoxdur",
+    "Xəyyam": "1.Subrogation bundle 2 not fix var.Digərləri  prod üçün hazırdı\n2.Master general test oluncaq\n3.Yoxdur"
+  },
+  "2025-10-08": {
+    "Ibrahim": "1)11 task etdim 2)1 task var 3) bloklanan hazırda task yoxdur",
+    "Rza": "1. Endowment readd test edildi fixlenib ve proda deploy olub. Isb import test edildi mastere merge olub\n2. Masterin testini edirem ve test caseleri step-by-step notion da dokumantasiya halinda yaziram\n3. Yoxdur"
+  },
+  "2025-10-09": {
+    "Rəsul": "1) 15 sorğu etdim\n2) 7 sorğum var. Gecikən osaqolar 104756\n3) Yoxdur",
+    "Fidan": "1)Test case-lər yazdım\n2)Crm auto generate taskı not fixdən qayıdıb ona baxacam\n3)yoxdur",
+    "Xəyyam": "1.Releasdeki tasklar yekunlaşdı.Master test olundu.Release 99 prod -a deploy olundu.\n2.Yeni task assign olunmasını gözləyirəm.\n3.Yoxdur"
+  },
+  "2025-10-13": {
+    "Rza": "1. Pass\n2. Liability yekunlasdiriram, release not hazirdi. Printleri test edib statusunu deyisdirecem\n3. Yoxdur",
+    "Ibrahim": "Salam,\n1) 10 task etdim\n2) 1 taskım var\n3) Bloklanan və gecikən sorğu yoxdur.",
+    "Müzəffər": "1) Dunen 8 sorgu hell etdim\n2) Bu gun 4 sorgum var,  geciken sorgu yoxdur\n3) Bloklayan problem yoxdur",
+    "Rəsul": "1) 15 sorğu həll etdim\n2) 4 sorğu var gecikən iki osaqolar perekadirovka\n3) yoxdur",
+    "Xəyyam": "1.Podratçının maşın və avadanlığının sığortası  database strukturu təmin olundu və test case-lər başlanıldı\n2.Podratçının maşın və avadanlığının sığortası   test case-lər dava etdrilir\n3.Yoxdu hələki"
+  },
+  "2025-10-14": {
+    "Fidan": "1)konullu ferdi qeza addendum-not fixed\n2)sefer sigortasinda addendum yaratmaq problemine baxiram\n3)yoxdur",
+    "Rəsul": "1) 13 sorğu həll etdim\n2) 3 sorğu var\n3) Bloklayan yoxdur",
+    "Rza": "1. Liability rfm ettim\n2. Printlerini cixaracam ayri-ayri Rehil xanim ile uzerinden kecek, her tipinde ferqli cap edilir (attachda olan fayllara uygundur)\n3. Yoxdur",
+    "Xəyyam": "1.Podratçının maşın və avadanlığının sığortası issue ilə əlaqəli testcase-lər yekunlaşdı\n2.Podratçının maşın və avadanlığının sığortası  çap,ləğv,xitam case-lərinə baxılacaq\n3.Yoxdur",
+    "Ibrahim": "1)10 sorğu etdim 2) Hazırda sorğum yoxdur. 3)Bloklanan və gecikən yoxdur.",
+    "Rəhilə": "1. jirada layihələri səliqəyə saldim, \n2. yeni sorğularin analizi və yeni tasklar yaratmaq\n3. yoxdur",
+    "Müzəffər": "1) Dunen 9 sorgu hell etdim\n2) Bu gun 1 sorgum var,  geciken sorgu yoxdur\n3) Bloklayan problem yoxdur"
+  },
+  "2025-10-16": {
+    "Rəsul": "1) 15 sorğu həll etdim\n2) 3 sorğu var\n3) Bloklayan yoxdur",
+    "Fidan": "1)Səfər sığortası addendum-not fixed\n2) hələ ki yoxdur\n3)remote qoşulmada problemlər var",
+    "Xəyyam": "1.PMC məhsulunda Rəhilə ilə bəzi məsələr dəqiqləşdirildi.\n2.PMC məhsulunda olan dəyişikliklər Taska əlavə oluncaq \n3.YOXDUR"
+  }
+}

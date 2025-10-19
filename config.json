@@ -1,0 +1,59 @@
+{
+  "TEAM": [
+    "Xəyyam",
+    "Rəhilə",
+    "Rza",
+    "Rəsul",
+    "Müzəffər",
+    "Ilkin",
+    "Ibrahim",
+    "Fidan",
+    "Vüqar"
+  ],
+  "WEEKLY_SCHEDULE": {
+    "Rəhilə": [],
+    "Xəyyam": [
+      2,
+      4
+    ],
+    "Rza": [
+      1,
+      3
+    ],
+    "Rəsul": [
+      4
+    ],
+    "Müzəffər": [
+      2
+    ],
+    "Ilkin": [],
+    "Ibrahim": [
+      3
+    ],
+    "Fidan": [
+      2,
+      4
+    ],
+    "Vüqar": []
+  },
+  "VACATIONS": {
+    "Xəyyam": [
+      [
+        "2025-09-22",
+        "2025-10-05"
+      ]
+    ],
+    "Vüqar": [],
+    "Rəhilə": [
+      [
+        "2025-09-24",
+        "2025-09-30"
+      ]
+    ]
+  },
+  "PROMPT_HOUR": 9,
+  "PROMPT_MINUTE": 26,
+  "SUMMARY_HOUR": 9,
+  "SUMMARY_MINUTE": 35,
+  "LIVE_SCRUM_AT": "9:35"
+}
