@@ -533,3 +533,58 @@ def cmd_sched_info(message):
         bot.reply_to(message, "\n".join(lines))
     except Exception as e:
         bot.reply_to(message, f"❌ Xəta: {e}")
+
+# --- HELP (ümumi) ---
+USER_HELP_TEXT = (
+    "Əsas əmrlər:\n"
+    "  /start – qısa tanışlıq\n"
+    "  /register <Ad> – özünü qeydiyyatdan keçir\n"
+    "  /job – bu günün ofis/remote/məzuniyyət xülasəsi\n"
+    "  /groupid – qrupun chat_id-si\n"
+)
+
+@bot.message_handler(commands=['help'])
+def cmd_help(message):
+    bot.reply_to(message, USER_HELP_TEXT)
+
+# --- HELP (admin) ---
+ADMIN_HELP_TEXT = (
+    "Salam! Bu botla config.json-u redaktə edə bilərsən (yalnız DM).\n"
+    "Öncə admin ol: /auth <PIN>\n"
+    "\n"
+    "TEAM:\n"
+    "  /team_list\n"
+    "  /team_add <Ad>\n"
+    "  /team_rm <Ad>\n"
+    "\n"
+    "WEEKLY_SCHEDULE:\n"
+    "  /sched_show [Ad]\n"
+    "  /sched_set <Ad> <günlər>\n"
+    "    (Mon=1..Sun=7, misal: 1,3,5)\n"
+    "\n"
+    "VACATIONS:\n"
+    "  /vac_show [Ad]\n"
+    "  /vac_add <Ad> <YYYY-MM-DD> <YYYY-MM-DD>\n"
+    "  /vac_rm <Ad> <YYYY-MM-DD> <YYYY-MM-DD>\n"
+    "\n"
+    "Vaxtlar:\n"
+    "  /time_set prompt HH:MM\n"
+    "  /time_set summary HH:MM\n"
+    "  /live_set HH:MM\n"
+    "\n"
+    "Bütöv konfiq:\n"
+    "  /cfg_show\n"
+    "\n"
+    "Qeyd: Dəyişiklikdən sonra job botda /cfg_reload yaz ki, dərhal tətbiq olsun."
+)
+
+@bot.message_handler(commands=['admin_help', 'help_admin'])
+def cmd_admin_help(message):
+    # yalnız DM-də göstər
+    if message.chat.type != "private":
+        return
+    # yalnız admin görə bilsin
+    if not is_admin(message.chat.id):
+        bot.reply_to(message, "Bu siyahı üçün admin olmalısan. /auth <PIN>")
+        return
+    bot.reply_to(message, ADMIN_HELP_TEXT)
