@@ -514,3 +514,24 @@ async def cron_prompt():
 async def cron_summary():
     job_post_summary()
     return JSONResponse({"status": "summary_posted"})
+from datetime import timezone as _tz
+
+@bot.message_handler(commands=['sched_info'])
+@admin_only
+def cmd_sched_info(message):
+    try:
+        jobs = scheduler.get_jobs()
+        if not jobs:
+            bot.reply_to(message, "🕓 APScheduler: heç bir iş tapılmadı. (Ola bilər ki, Cron Job istifadə olunur və ya scheduler start olmayıb.)")
+            return
+        lines = ["🕓 APScheduler aktivdir. Mövcud işlər:"]
+        for j in jobs:
+            nrt = j.next_run_time
+            if nrt is not None and nrt.tzinfo is not None:
+                nrt_local = nrt.astimezone(TIMEZONE).strftime("%Y-%m-%d %H:%M:%S")
+            else:
+                nrt_local = "—"
+            lines.append(f"• {j.id}: növbəti icra = {nrt_local}")
+        bot.reply_to(message, "\n".join(lines))
+    except Exception as e:
+        bot.reply_to(message, f"❌ Xəta: {e}")
