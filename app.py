@@ -480,6 +480,47 @@ def cmd_live_set(message):
     cfg = _load_config_or_die(); cfg["LIVE_SCRUM_AT"] = t; save_json(CONFIG_FILE, cfg)
     bot.reply_to(message, f"✅ LIVE_SCRUM_AT = {t}\n💡 /cfg_reload yaz ki, dərhal tətbiq olsun.")
 
+@bot.message_handler(commands=['testping'])
+@admin_only
+def cmd_testping(message):
+    parts = message.text.split(maxsplit=1)
+
+    if len(parts) < 2:
+        bot.reply_to(
+            message,
+            "İstifadə: /testping HH:MM[,HH:MM,...]\n"
+            "Nümunə: /testping 11:00,17:30"
+        )
+        return
+
+    # Mətni təmizlə (boşluqları sil)
+    raw = parts[1].replace(" ", "")
+    times = raw.split(",")
+
+    # Validasiya
+    for t in times:
+        try:
+            hh, mm = t.split(":")
+            int(hh); int(mm)  # int çevirmə ilə yoxlayır
+        except Exception:
+            bot.reply_to(message, f"❗ Yanlış vaxt formatı: `{t}`. Düz format: HH:MM")
+            return
+
+    # Config-i yüklə
+    cfg = _load_config_or_die()
+    cfg["TESTERS_PING_TIMES"] = times
+
+    # Config-i saxla (mövcud mexanizmlə)
+    save_json(CONFIG_FILE, cfg)
+
+    bot.reply_to(
+        message,
+        "✅ Tester ping saatları yeniləndi: " + ", ".join(times) +
+        "\n💡 Dərhal effekt verməsi üçün: `/cfg_reload` yaz."
+    )
+ 
+
+
 # ======== Scheduled jobs (prompt & summary) ========
 def job_send_prompts():
     users = load_json(USERS_FILE, {})
