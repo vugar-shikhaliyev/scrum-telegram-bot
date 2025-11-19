@@ -300,24 +300,21 @@ def cmd_cfg_show(message):
     try:
         cfg = _load_config_or_die()
 
+        # Səliqəli multi-line JSON
         text = json.dumps(
             cfg,
-            ensure_ascii=False,     # Azərbaycan hərfləri normal görünsün
-            separators=(',', ': ')  # daha sıx format
+            ensure_ascii=False,   # Azərbaycan hərfləri üçün
+            indent=2              # hər səviyyədə 2 boşluq
         )
 
-        # Code block formatına sal
-        # Telegram maximum message size-lə çarpışsa hissə-hissə göndərəcəyik
         pretty = f"```json\n{text}\n```"
 
-        if len(pretty) > 4000:  # Telegram limit
-            for i in range(0, len(pretty), 3900):
-                bot.reply_to(message, pretty[i:i+3900], parse_mode="Markdown")
-        else:
-            bot.reply_to(message, pretty, parse_mode="Markdown")
+        # Config böyük deyil, limitə girmir, ona görə parçalamasız göndəririk
+        bot.reply_to(message, pretty, parse_mode="Markdown")
 
     except Exception as e:
         bot.reply_to(message, f"❌ Xəta: {e}")
+
 
 
 @bot.message_handler(commands=['team_list'])
