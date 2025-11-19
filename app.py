@@ -513,7 +513,7 @@ def job_testers_ping():
         return
 
     names = ", ".join(TESTERS)
-    text = f"{names}, zəhmət olmasa test etdiyiniz taskların cari statuslarını qeyd edin. 🙏"
+    text = f"{names}, zəhmət olmasa test etdiyiniz taskların cari statuslarını qeyd edin."
 
     try:
         bot.send_message(GROUP_CHAT_ID, text)
