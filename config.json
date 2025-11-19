@@ -71,5 +71,7 @@
   "PROMPT_MINUTE": 10,
   "SUMMARY_HOUR": 9,
   "SUMMARY_MINUTE": 30,
-  "LIVE_SCRUM_AT": "9:35"
+  "LIVE_SCRUM_AT": "9:35",
+  "TESTERS": ["Xəyyam", "Fidan", "İlkin"],
+  "TESTERS_PING_TIMES": ["14:40", "15:30"]
 }
