@@ -118,8 +118,12 @@ SUMMARY_HOUR     = CONFIG["SUMMARY_HOUR"]
 SUMMARY_MINUTE   = CONFIG["SUMMARY_MINUTE"]
 LIVE_SCRUM_AT    = CONFIG["LIVE_SCRUM_AT"]
 
+TESTERS            = CONFIG.get("TESTERS", [])
+TESTERS_PING_TIMES = CONFIG.get("TESTERS_PING_TIMES", [])
+
 def reschedule_jobs():
     try:
+        # Əsas iki job
         scheduler.add_job(
             job_send_prompts,
             CronTrigger(day_of_week="mon-fri", hour=PROMPT_HOUR, minute=PROMPT_MINUTE, timezone=TIMEZONE),
@@ -130,8 +134,33 @@ def reschedule_jobs():
             CronTrigger(day_of_week="mon-fri", hour=SUMMARY_HOUR, minute=SUMMARY_MINUTE, timezone=TIMEZONE),
             id="summary", replace_existing=True
         )
+
+        # 🔹 Köhnə testers_ping_* job-ları təmizlə
+        for job in scheduler.get_jobs():
+            if job.id.startswith("testers_ping_"):
+                scheduler.remove_job(job.id)
+
+        # 🔹 Configdə neçə vaxt varsa, o qədər job əlavə et
+        for idx, t in enumerate(TESTERS_PING_TIMES):
+            try:
+                hour_str, minute_str = t.split(":")
+                hour = int(hour_str)
+                minute = int(minute_str)
+            except Exception:
+                # səhv formatlı saatları skip elə
+                continue
+
+            scheduler.add_job(
+                job_testers_ping,
+                CronTrigger(day_of_week="mon-fri", hour=hour, minute=minute, timezone=TIMEZONE),
+                id=f"testers_ping_{idx}",
+                replace_existing=True
+            )
+
     except Exception:
+        # burda çox səs-küy olmasın deyə pass edirdin, elə saxladım
         pass
+
 
 # ======== Bot ========
 bot = telebot.TeleBot(BOT_TOKEN)
@@ -169,6 +198,8 @@ def cmd_job(message):
 def cmd_cfg_reload(message):
     global CONFIG, TEAM, WEEKLY_SCHEDULE, VACATIONS
     global PROMPT_HOUR, PROMPT_MINUTE, SUMMARY_HOUR, SUMMARY_MINUTE, LIVE_SCRUM_AT
+    global TESTERS, TESTERS_PING_TIMES   # 🔹 əlavə et
+
     try:
         CONFIG           = _load_config_or_die()
         TEAM             = CONFIG["TEAM"]
@@ -179,10 +210,16 @@ def cmd_cfg_reload(message):
         SUMMARY_HOUR     = CONFIG["SUMMARY_HOUR"]
         SUMMARY_MINUTE   = CONFIG["SUMMARY_MINUTE"]
         LIVE_SCRUM_AT    = CONFIG["LIVE_SCRUM_AT"]
+
+        # 🔹 yenilər
+        TESTERS            = CONFIG.get("TESTERS", [])
+        TESTERS_PING_TIMES = CONFIG.get("TESTERS_PING_TIMES", [])
+
         reschedule_jobs()
         bot.reply_to(message, "✅ config.json yenidən yükləndi və cədvəllər yeniləndi.")
     except Exception as e:
         bot.reply_to(message, f"❌ Yükləmə alınmadı: {e}")
+
 
 # --- REGISTER (DM) ---
 @bot.message_handler(commands=['register'])
@@ -469,6 +506,20 @@ def job_send_prompts():
                 GROUP_CHAT_ID,
                 f"📣 Remote olmayanlar üçün {LIVE_SCRUM_AT}-də live scrum: {', '.join(non_remote)}"
             )
+
+def job_testers_ping():
+    # Qrup konfiq olunmayıbsa / tester siyahısı boşdursa, heç nə etmə
+    if not GROUP_CHAT_ID or not TESTERS:
+        return
+
+    names = ", ".join(TESTERS)
+    text = f"{names}, zəhmət olmasa test etdiyiniz taskların cari statuslarını qeyd edin. 🙏"
+
+    try:
+        bot.send_message(GROUP_CHAT_ID, text)
+    except Exception as e:
+        logging.exception("job_testers_ping ERROR: %s", e)
+
 
 def job_post_summary():
     answers = load_json(ANSWERS_FILE, {})
