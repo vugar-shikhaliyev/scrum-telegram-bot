@@ -467,32 +467,77 @@ def cmd_vac_rm(message):
     save_json(CONFIG_FILE, cfg)
     bot.reply_to(message, f"✅ {name}: {a} → {b} silindi.")
 
-@bot.message_handler(commands=['time_set'])
+@bot.message_handler(commands=['prompt'])
 @admin_only
-def cmd_time_set(message):
-    parts = message.text.split()
-    if len(parts) != 3 or parts[1] not in ("prompt", "summary") or ":" not in parts[2]:
-        bot.reply_to(message, "İstifadə: /time_set prompt HH:MM  və ya  /time_set summary HH:MM")
-        return
-    hh, mm = parse_hhmm(parts[2])
-    cfg = _load_config_or_die()
-    if parts[1] == "prompt":
-        cfg["PROMPT_HOUR"], cfg["PROMPT_MINUTE"] = hh, mm
-    else:
-        cfg["SUMMARY_HOUR"], cfg["SUMMARY_MINUTE"] = hh, mm
-    save_json(CONFIG_FILE, cfg)
-    bot.reply_to(message, f"✅ {parts[1]} vaxtı {hh:02d}:{mm:02d} saxlandı.\n💡 /cfg_reload yaz ki, dərhal tətbiq olsun.")
-
-@bot.message_handler(commands=['live_set'])
-@admin_only
-def cmd_live_set(message):
+def cmd_prompt(message):
     parts = message.text.split(maxsplit=1)
-    if len(parts) < 2 or ":" not in parts[1]:
-        bot.reply_to(message, "İstifadə: /live_set HH:MM")
+
+    if len(parts) < 2:
+        bot.reply_to(message, "İstifadə: /prompt HH:MM\nNümunə: /prompt 09:15")
         return
-    t = parts[1].strip(); parse_hhmm(t)
-    cfg = _load_config_or_die(); cfg["LIVE_SCRUM_AT"] = t; save_json(CONFIG_FILE, cfg)
-    bot.reply_to(message, f"✅ LIVE_SCRUM_AT = {t}\n💡 /cfg_reload yaz ki, dərhal tətbiq olsun.")
+
+    tm = parts[1].strip()
+    try:
+        hh, mm = tm.split(":")
+        hh = int(hh); mm = int(mm)
+    except:
+        bot.reply_to(message, f"❗ Yanlış vaxt formatı: `{tm}`. Düz format: HH:MM")
+        return
+
+    cfg = _load_config_or_die()
+    cfg["PROMPT_HOUR"] = hh
+    cfg["PROMPT_MINUTE"] = mm
+
+    save_json(CONFIG_FILE, cfg)
+    bot.reply_to(message, f"⏰ Prompt vaxtı yeniləndi: {hh:02d}:{mm:02d}\n💡 /cfg_reload yaz ki, dərhal tətbiq olunsun.")
+
+@bot.message_handler(commands=['summary'])
+@admin_only
+def cmd_summary(message):
+    parts = message.text.split(maxsplit=1)
+
+    if len(parts) < 2:
+        bot.reply_to(message, "İstifadə: /summary HH:MM\nNümunə: /summary 17:00")
+        return
+
+    tm = parts[1].strip()
+    try:
+        hh, mm = tm.split(":")
+        hh = int(hh); mm = int(mm)
+    except:
+        bot.reply_to(message, f"❗ Yanlış format: `{tm}`. Düz format: HH:MM")
+        return
+
+    cfg = _load_config_or_die()
+    cfg["SUMMARY_HOUR"] = hh
+    cfg["SUMMARY_MINUTE"] = mm
+
+    save_json(CONFIG_FILE, cfg)
+    bot.reply_to(message, f"📌 Summary vaxtı yeniləndi: {hh:02d}:{mm:02d}\n💡 /cfg_reload yaz.")
+
+@bot.message_handler(commands=['live'])
+@admin_only
+def cmd_live(message):
+    parts = message.text.split(maxsplit=1)
+
+    if len(parts) < 2:
+        bot.reply_to(message, "İstifadə: /live HH:MM\nNümunə: /live 09:40")
+        return
+
+    tm = parts[1].strip()
+    try:
+        hh, mm = tm.split(":")
+        hh = int(hh); mm = int(mm)
+    except:
+        bot.reply_to(message, f"❗ Yanlış format: `{tm}`. Düz format: HH:MM")
+        return
+
+    cfg = _load_config_or_die()
+    cfg["LIVE_SCRUM_AT"] = f"{hh}:{mm}"
+
+    save_json(CONFIG_FILE, cfg)
+    bot.reply_to(message, f"🎥 Canlı scrum saatı yeniləndi: {hh:02d}:{mm:02d}\n💡 /cfg_reload yaz.")
+
 
 @bot.message_handler(commands=['testping'])
 @admin_only
@@ -653,7 +698,6 @@ USER_HELP_TEXT = (
 def cmd_help(message):
     bot.reply_to(message, USER_HELP_TEXT)
 
-# --- HELP (admin) ---
 ADMIN_HELP_TEXT = (
     "Salam! Bu botla config.json-u redaktə edə bilərsən (yalnız DM).\n"
     "Öncə admin ol: /auth <PIN>\n"
@@ -674,15 +718,15 @@ ADMIN_HELP_TEXT = (
     "  /vac_rm <Ad> <YYYY-MM-DD> <YYYY-MM-DD>\n"
     "\n"
     "Vaxtlar:\n"
-    "  /time_set prompt HH:MM\n"
-    "  /time_set summary HH:MM\n"
-    "  /live_set HH:MM\n"
-    "  /testping HH:MM\n"
+    "  /prompt HH:MM        (standup xatırlatma vaxtı)\n"
+    "  /summary HH:MM       (günün yekun vaxtı)\n"
+    "  /live HH:MM          (canlı scrum vaxtı)\n"
+    "  /testping HH:MM[,HH:MM,...]  (tester ping vaxtları)\n"
     "\n"
     "Bütöv konfiq:\n"
     "  /cfg_show\n"
     "\n"
-    "Qeyd: Dəyişiklikdən sonra job botda /cfg_reload yaz ki, dərhal tətbiq olsun."
+    "Qeyd: Dəyişiklikdən sonra botda /cfg_reload yaz ki, dərhal tətbiq olunsun."
 )
 
 @bot.message_handler(commands=['admin_help', 'help_admin'])
