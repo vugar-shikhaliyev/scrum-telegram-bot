@@ -297,14 +297,28 @@ def cmd_auth(message):
 @bot.message_handler(commands=['cfg_show'])
 @admin_only
 def cmd_cfg_show(message):
-    text = json.dumps(_load_config_or_die(), ensure_ascii=False, indent=2)
-    if len(text) <= 3800:
-        bot.reply_to(message, "```json\n" + text + "\n```")
-    else:
-        chunk = 3500
-        bot.reply_to(message, "Konfiqin hissələri:")
-        for i in range(0, len(text), chunk):
-            bot.send_message(message.chat.id, "```json\n" + text[i:i+chunk] + "\n```")
+    try:
+        cfg = _load_config_or_die()
+
+        text = json.dumps(
+            cfg,
+            ensure_ascii=False,     # Azərbaycan hərfləri normal görünsün
+            separators=(',', ': ')  # daha sıx format
+        )
+
+        # Code block formatına sal
+        # Telegram maximum message size-lə çarpışsa hissə-hissə göndərəcəyik
+        pretty = f"```json\n{text}\n```"
+
+        if len(pretty) > 4000:  # Telegram limit
+            for i in range(0, len(pretty), 3900):
+                bot.reply_to(message, pretty[i:i+3900], parse_mode="Markdown")
+        else:
+            bot.reply_to(message, pretty, parse_mode="Markdown")
+
+    except Exception as e:
+        bot.reply_to(message, f"❌ Xəta: {e}")
+
 
 @bot.message_handler(commands=['team_list'])
 @admin_only
