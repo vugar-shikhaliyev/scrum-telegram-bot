@@ -663,6 +663,7 @@ ADMIN_HELP_TEXT = (
     "  /time_set prompt HH:MM\n"
     "  /time_set summary HH:MM\n"
     "  /live_set HH:MM\n"
+    "  /testping HH:MM\n"
     "\n"
     "Bütöv konfiq:\n"
     "  /cfg_show\n"
