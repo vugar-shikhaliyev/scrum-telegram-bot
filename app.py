@@ -723,8 +723,8 @@ ADMIN_HELP_TEXT = (
     "Bütöv konfiq:\n"
     "  /cfg_show\n"
     "\n"
-    "Kodlar https://dashboard.render.com/ hosting olunub\n"
-    "Servis https://dash.cloudflare.com/ ilə keep alive saxlanılır\n"
+    "Kodlar https://dashboard.render.com./ hosting olunub\n"
+    "Servis https://dash.cloudflare.com./ ilə keep alive saxlanılır\n"
     "Qeyd: Dəyişiklikdən sonra botda /cfg_reload yaz ki, dərhal tətbiq olunsun."
 )
 
