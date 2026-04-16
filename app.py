@@ -272,9 +272,7 @@ def handle_private_text(message):
 # ======== CONFIG COMMANDS (admin PIN) ========
 def admin_only(fn):
     def wrapper(message, *a, **kw):
-        if message.chat.type != "private":
-            return
-        if not is_admin(message.chat.id):
+        if not is_admin(message.from_user.id):
             bot.reply_to(message, "Bu əmri yerinə yetirmək üçün admin olmalısan. /auth <PIN>")
             return
         return fn(message, *a, **kw)
